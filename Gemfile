@@ -6,6 +6,8 @@ gem "pg"
 gem "rails", "~> 4.2.5"
 gem 'rack-mini-profiler'
 gem 'rubocop', require: false
+gem 'webpack-rails'
+gem 'foreman'
 
 group :development do
   gem "quiet_assets"
