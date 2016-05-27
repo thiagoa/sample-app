@@ -16,13 +16,21 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "jsdom": "^9.0.0",
+    "karma": "^0.13.22",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-commonjs": "^1.0.0",
+    "karma-mocha": "^1.0.1",
+    "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
     "mocha-jsdom": "^1.1.0",
     "mocha-loader": "^0.7.1",
-    "mocha-webpack": "^0.3.0"
+    "mocha-webpack": "^0.3.1"
   },
   "scripts": {
     "test": "NODE_PATH='./app/assets/javascripts' node_modules/.bin/mocha-webpack",
+    "test:watch": "npm run test -- --watch",
     "test:debug": "NODE_PATH='./app/assets/javascripts' webpack-dev-server --config config/webpack.config.test.browser.js --hot --inline"
   }
 }

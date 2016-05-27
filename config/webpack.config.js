@@ -28,7 +28,7 @@ var config = {
     ]
   },
   resolve: {
-    root: path.join(__dirname, '..', 'webpack')
+    root: path.join(__dirname, '..', 'app', 'assets', 'javascripts')
   },
   plugins: [
     // must match config.webpack.manifest_filename
