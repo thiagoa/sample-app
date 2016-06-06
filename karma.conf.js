@@ -1,42 +1,49 @@
-var webpackConfig = require('./config/webpack.config.js');
+var webpack = require('karma-webpack');
+var webpackConfig = require('./config/webpack.config');
 var path = require('path');
 
-webpackConfig.entry = {};
+webpackConfig.entry = {
+  test: path.resolve(__dirname, 'spec/javascripts/index.karma.js')
+};
+
+webpackConfig.devtool = 'inline-source-map';
 
 module.exports = function(config) {
   config.set({
-    basePath: '',
-    frameworks: ['mocha', 'chai'],
+    browsers: [
+      'Chrome',
+      'PhantomJS2'
+    ],
+    port: 9876,
+    basePath: '.',
     files: [
-      './spec/javascripts/**/*.spec.js'
+      // avoids running tests twice when on watch mode
+      { pattern: 'spec/javascripts/index.karma.js', watched: false, included: true, served: true }
     ],
     preprocessors: {
-      '../spec/javascripts/**/*.spec.js': ['babel', 'webpack']
+      'spec/javascripts/index.karma.js': ['webpack', 'sourcemap']
     },
-    babelPreprocessor: {
-      options: {
-        presets: ['es2015'],
-        sourceMap: 'inline'
-      },
-    },
+    frameworks: ['mocha', 'chai'],
+    plugins: [
+      webpack,
+      'karma-mocha',
+      'karma-chai',
+      'karma-chrome-launcher',
+      'karma-phantomjs2-launcher',
+      'karma-spec-reporter',
+      'karma-sourcemap-loader'
+    ],
+    reporters: ['spec'],
+    colors: true,
+    logLevel: config.LOG_INFO,
+    autoWatch: false,
+    singleRun: true,
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true
     },
-    plugins: [
-      'karma-babel-preprocessor',
-      'karma-commonjs',
-      'karma-mocha',
-      'karma-chai',
-      'karma-webpack',
-      'karma-chrome-launcher'
-    ],
-    reporters: ['progress'],
-    port: 9876,
-    colors: true,
-    logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false
-  })
+    phantomjsLauncher: {
+      exitOnResourceError: true
+    }
+  });
 }
