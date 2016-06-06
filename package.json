@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "jsdom": "^9.0.0",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^1.0.1",
@@ -25,7 +24,6 @@
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
-    "mocha-jsdom": "^1.1.0",
     "mocha-loader": "^0.7.1",
     "mocha-webpack": "^0.3.1"
   },
