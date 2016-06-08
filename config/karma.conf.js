@@ -1,28 +1,27 @@
 var webpack = require('karma-webpack');
-var webpackConfig = require('./config/webpack.config');
+var webpackConfig = require('./webpack.config');
 var path = require('path');
+var webpackEntryFile = '../spec/javascripts/index.integration.js';
+var karmaPreprocessors = {};
+
+karmaPreprocessors[webpackEntryFile] = ['webpack', 'sourcemap'];
 
 webpackConfig.entry = {
-  test: path.resolve(__dirname, 'spec/javascripts/index.karma.js')
+  test: path.resolve(__dirname, webpackEntryFile)
 };
 
 webpackConfig.devtool = 'inline-source-map';
 
 module.exports = function(config) {
   config.set({
-    browsers: [
-      'Chrome',
-      'PhantomJS2'
-    ],
+    browsers: ['PhantomJS2'],
     port: 9876,
     basePath: '.',
     files: [
       // avoids running tests twice when on watch mode
-      { pattern: 'spec/javascripts/index.karma.js', watched: false, included: true, served: true }
+      { pattern: webpackEntryFile, watched: false, included: true, served: true }
     ],
-    preprocessors: {
-      'spec/javascripts/index.karma.js': ['webpack', 'sourcemap']
-    },
+    preprocessors: karmaPreprocessors,
     frameworks: ['mocha', 'chai'],
     plugins: [
       webpack,

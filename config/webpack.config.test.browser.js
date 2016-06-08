@@ -6,7 +6,7 @@ config.devServer = {
   port: '8081'
 };
 
-const index = path.resolve(__dirname, '../spec/javascripts/index.js');
+const index = path.resolve(__dirname, '../spec/javascripts/index.browser.js');
 
 config.entry = {
   test: [`mocha!${index}`]
